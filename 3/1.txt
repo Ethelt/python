@@ -1,0 +1,16 @@
+x = 2; y = 3;
+if (x > y):
+    result = x;
+else:
+    result = y;
+
+poprawne
+
+
+for i in "axby": if ord(i) < 100: print (i)
+
+niepoprawne - brak przejśia na nową linię
+
+for i in "axby": print (ord(i) if ord(i) < 100 else i)
+
+poprawne

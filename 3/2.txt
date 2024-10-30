@@ -1,0 +1,20 @@
+L = [3, 5, 4] ; L = L.sort()
+w Pythonie nie używamy średników do oddzielania instrukcji w jednej linii, musimy używać przejścia do nowej linii
+sort zwraca None a nie posortowaną listę
+
+x, y = 1, 2, 3
+mamy 3 wartości, a dwie zmiennej
+
+X = 1, 2, 3 ; X[1] = 4
+X nie jest listą, poniewa nie ma nawiasów
+
+X = [1, 2, 3] ; X[3] = 4
+w Pythonie nie używamy średników do oddzielania instrukcji w jednej linii, musimy używać przejścia do nowej linii
+lista ma 3 elementy, nie istnieje indeks 3
+
+X = "abc" ; X.append("d")
+w Pythonie nie używamy średników do oddzielania instrukcji w jednej linii, musimy używać przejścia do nowej linii
+string nie ma metody append
+
+L = list(map(pow, range(8)))
+funkcja pow przyjmuje dwa argumenty

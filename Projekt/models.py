@@ -43,7 +43,9 @@ class Account:
     def create(cursor, holder_name, initial_balance=0):
         account_number = Account._generate_account_number()
         cursor.execute(
-            "INSERT INTO accounts (account_number, holder_name, balance, created_at) VALUES (?, ?, ?, ?)",
+            """INSERT INTO accounts 
+            (account_number, holder_name, balance, created_at) 
+            VALUES (?, ?, ?, ?)""",
             (account_number, holder_name, initial_balance, datetime.now())
         )
         return Account(account_number, holder_name, initial_balance)
@@ -51,10 +53,9 @@ class Account:
     @staticmethod
     def find_by_account_number(cursor, account_number):
         cursor.execute(
-            '''SELECT account_number, holder_name, balance, status 
+            """SELECT account_number, holder_name, balance, status 
             FROM accounts 
-            WHERE account_number = ? AND status = 'active'
-            ''',
+            WHERE account_number = ? AND status = 'active'""",
             (account_number,)
         )
         result = cursor.fetchone()
@@ -64,7 +65,9 @@ class Account:
 
     @staticmethod
     def find_all(cursor):
-        cursor.execute("SELECT account_number, holder_name, balance, status FROM accounts")
+        cursor.execute(
+            "SELECT account_number, holder_name, balance, status FROM accounts"
+        )
         accounts = []
         for row in cursor.fetchall():
             accounts.append(Account(row[0], row[1], row[2], row[3]))
@@ -91,7 +94,9 @@ class Account:
         
         
 class Transaction:
-    def __init__(self, account_number, transaction_type, amount, timestamp, related_account=None):
+    def __init__(
+        self, account_number, transaction_type, amount, timestamp, related_account=None
+    ):
         self.account_number = account_number
         self.transaction_type = transaction_type
         self.amount = amount
@@ -102,22 +107,27 @@ class Transaction:
     def create(cursor, account_number, transaction_type, amount, related_account=None):
         timestamp = datetime.now()
         cursor.execute(
-            '''INSERT INTO transactions (account_number, transaction_type, amount, timestamp, related_account) 
-            VALUES (?, ?, ?, ?, ?)''',
+            """INSERT INTO transactions 
+            (account_number, transaction_type, amount, timestamp, related_account) 
+            VALUES (?, ?, ?, ?, ?)""",
             (account_number, transaction_type, amount, timestamp, related_account)
         )
-        return Transaction(account_number, transaction_type, amount, timestamp, related_account)
+        return Transaction(
+            account_number, transaction_type, amount, timestamp, related_account
+        )
 
     @staticmethod
     def get_transactions(cursor, account_number):
         cursor.execute(
-            '''SELECT account_number, transaction_type, amount, timestamp, related_account 
+            """SELECT account_number, transaction_type, amount, timestamp, related_account 
             FROM transactions 
             WHERE account_number = ? 
-            ORDER BY timestamp DESC''',
+            ORDER BY timestamp DESC""",
             (account_number,)
         )
         transactions = []
         for row in cursor.fetchall():
-            transactions.append(Transaction(row[0], row[1], row[2], row[3], row[4]))
+            transactions.append(
+                Transaction(row[0], row[1], row[2], row[3], row[4])
+            )
         return transactions

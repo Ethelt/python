@@ -90,10 +90,17 @@ class BankInterface:
             
         print("\nAll Bank Accounts:")
         print("-" * 75)
-        print(f"{'Account Number':<15} {'Holder Name':<25} {'Balance':>10} {'Status':>15}")
+        header = (
+            f"{'Account Number':<15} {'Holder Name':<25} "
+            f"{'Balance':>10} {'Status':>15}"
+        )
+        print(header)
         print("-" * 75)
         for account in accounts:
-            print(f"{account.account_number:<15} {account.holder_name:<25} {account.balance:>10.2f} {account.status:>15}")
+            print(
+                f"{account.account_number:<15} {account.holder_name:<25} "
+                f"{account.balance:>10.2f} {account.status:>15}"
+            )
 
     def _view_transactions(self):
         account_number = input("Enter account number: ")
@@ -105,7 +112,11 @@ class BankInterface:
             
         print("\nTransaction History:")
         print("-" * 100)
-        print(f"{'Type':<15} {'Amount':<12} {'Date':<30} {'Related Account':<15}")
+        header = (
+            f"{'Type':<15} {'Amount':<12} {'Date':<30} "
+            f"{'Related Account':<15}"
+        )
+        print(header)
         print("-" * 100)
         
         for trans in transactions:
@@ -115,4 +126,7 @@ class BankInterface:
             else:
                 related = ''
             
-            print(f"{trans.transaction_type:<15} {abs(trans.amount):<12.2f} {trans.timestamp:<30} {related:<15}")
+            print(
+                f"{trans.transaction_type:<15} {abs(trans.amount):<12.2f} "
+                f"{trans.timestamp:<30} {related:<15}"
+            )

@@ -72,8 +72,12 @@ class Bank:
         from_acc.change_balance(cursor, -amount)
         to_acc.change_balance(cursor, amount)
         
-        Transaction.create(cursor, from_acc.account_number, 'transfer', -amount, to_acc.account_number)
-        Transaction.create(cursor, to_acc.account_number, 'transfer', amount, from_acc.account_number)
+        Transaction.create(
+            cursor, from_acc.account_number, 'transfer', -amount, to_acc.account_number
+        )
+        Transaction.create(
+            cursor, to_acc.account_number, 'transfer', amount, from_acc.account_number
+        )
         self.db.conn.commit()
     
     def get_balance(self, account_number):

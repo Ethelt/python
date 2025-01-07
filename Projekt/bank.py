@@ -9,6 +9,8 @@ class Bank:
         return Account.find_all(cursor)
     
     def create_account(self, holder_name, initial_balance=0):
+        if initial_balance < 0:
+            raise ValueError("Initial balance cannot be negative")
         cursor = self.db.conn.cursor()
         account = Account.create(cursor, holder_name, initial_balance)
         self.db.conn.commit()
@@ -19,6 +21,8 @@ class Bank:
         account = Account.find_by_account_number(cursor, account_number)
         if not account:
             raise ValueError("Account not found or inactive")
+        if account.balance > 0:
+            raise ValueError("Account has a balance, cannot be closed")
         account.close(cursor)
         self.db.conn.commit()
     

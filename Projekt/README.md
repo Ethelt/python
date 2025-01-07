@@ -11,6 +11,12 @@ A simple command-line banking application that allows bank employees to manage c
 - Persistent storage using SQLite database
 - Transaction history tracking
 
+## Limitations
+
+- Overdraft is not allowed - accounts cannot have negative balances
+- Closed accounts cannot be reopened
+- Accounts cannot be closed if they have a balance - all money must be withdrawn before closing
+
 ## Installation
 
 1. Make sure you have Python 3 installed.

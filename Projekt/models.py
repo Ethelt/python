@@ -75,6 +75,8 @@ class Account:
         return f"ACC{random.randint(10000, 99999)}" 
     
     def change_balance(self, cursor, amount):
+        if self.balance + amount < 0:
+            raise ValueError("Account cannot have negative balance")
         self.balance += amount
         cursor.execute(
             "UPDATE accounts SET balance = balance + ? WHERE account_number = ?",

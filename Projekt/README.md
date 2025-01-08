@@ -42,6 +42,15 @@ source venv/bin/activate
 python main.py
 ```
 
+## Application Structure
+
+The application is divided into several modules:
+
+- `main.py`: Entry point for the application
+- `models.py`: Data models representing bank entities; database operations in these models
+- `bank.py`: Core banking logic using models defined in `models.py`
+- `interface.py`: Handles user interaction and information display
+
 ## Database Structure
 
 The application uses SQLite with two main tables:
